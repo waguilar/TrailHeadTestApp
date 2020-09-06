@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.452" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTO\" />
+  </ItemGroup>
+
+</Project>

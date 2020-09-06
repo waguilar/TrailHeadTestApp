@@ -1,0 +1,11 @@
+*.scc
+bin/
+obj/
+TestResults/
+.vs/
+*.userprefs
+.DS_Store
+*.user
+packages/
+*.DotSettings
+*.bak
