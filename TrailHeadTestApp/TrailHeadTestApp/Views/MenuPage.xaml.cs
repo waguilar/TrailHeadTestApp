@@ -1,9 +1,7 @@
 ﻿using TrailHeadTestApp.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace TrailHeadTestApp.Views
 {
@@ -21,7 +19,8 @@ namespace TrailHeadTestApp.Views
             menuItems = new List<HomeMenuItem>
             {
                 new HomeMenuItem {Id = MenuItemType.Employees, Title="Employees" },
-                new HomeMenuItem {Id = MenuItemType.BarcodeScanner, Title="Barcode Scanner" },
+                new HomeMenuItem {Id = MenuItemType.BarcodeScanner, Title="BarcodeScanner" },
+                new HomeMenuItem {Id = MenuItemType.GenerateQR, Title="QR Generator" },
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" }
             };
 

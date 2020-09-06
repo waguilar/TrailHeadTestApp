@@ -8,6 +8,7 @@ namespace TrailHeadTestApp.Models
     {
         Employees,
         BarcodeScanner,
+        GenerateQR,
         About
     }
     public class HomeMenuItem

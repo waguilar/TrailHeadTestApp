@@ -29,16 +29,19 @@ namespace TrailHeadTestApp.Droid
             DIService.Container = AndroidDIConfiguration.InitDI();
             base.OnCreate(savedInstanceState);
 
-            //Configure Barcode Scanner
-
             //Configure Xamarin Essentials
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
+            //Configure Barcode Scanner
+            ZXing.Net.Mobile.Forms.Android.Platform.Init();
+
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
+            ZXing.Net.Mobile.Android.PermissionsHandler.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }

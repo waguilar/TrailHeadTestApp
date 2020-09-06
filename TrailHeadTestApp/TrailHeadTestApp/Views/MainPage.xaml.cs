@@ -17,7 +17,7 @@ namespace TrailHeadTestApp.Views
 
             MasterBehavior = MasterBehavior.Popover;
 
-            MenuPages.Add(MenuItemType.BarcodeScanner, (NavigationPage)Detail);
+            MenuPages.Add(MenuItemType.Employees, (NavigationPage)Detail);
         }
 
         public async Task NavigateFromMenu(MenuItemType id)
@@ -31,6 +31,9 @@ namespace TrailHeadTestApp.Views
                         break;
                     case MenuItemType.BarcodeScanner:
                         MenuPages.Add(id, new NavigationPage(new BarcodeScannerPage()));
+                        break;
+                    case MenuItemType.GenerateQR:
+                        MenuPages.Add(id, new NavigationPage(new GenerateQRPage()));
                         break;
                     case MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
