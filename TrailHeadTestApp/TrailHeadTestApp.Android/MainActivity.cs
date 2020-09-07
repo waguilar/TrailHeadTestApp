@@ -29,6 +29,8 @@ namespace TrailHeadTestApp.Droid
             DIService.Container = AndroidDIConfiguration.InitDI();
             base.OnCreate(savedInstanceState);
 
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+
             //Configure Xamarin Essentials
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 

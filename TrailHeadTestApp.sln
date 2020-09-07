@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrailHeadTestApp", "TrailHe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrailHeadTestApp.Interfaces", "TrailHeadTestApp.Interfaces\TrailHeadTestApp.Interfaces.csproj", "{46FEF75C-15A4-4106-A53E-18C372483DD6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{C3A7B292-3095-4040-A209-364923803378}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrailHeadTestApp.UnitTest", "TrailHeadTestApp.UnitTest\TrailHeadTestApp.UnitTest.csproj", "{130725DF-281C-4A9F-907E-BD55690AF665}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,9 +91,24 @@ Global
 		{46FEF75C-15A4-4106-A53E-18C372483DD6}.Release|iPhone.Build.0 = Release|Any CPU
 		{46FEF75C-15A4-4106-A53E-18C372483DD6}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{46FEF75C-15A4-4106-A53E-18C372483DD6}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{130725DF-281C-4A9F-907E-BD55690AF665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{130725DF-281C-4A9F-907E-BD55690AF665}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{130725DF-281C-4A9F-907E-BD55690AF665}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{130725DF-281C-4A9F-907E-BD55690AF665}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{130725DF-281C-4A9F-907E-BD55690AF665}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{130725DF-281C-4A9F-907E-BD55690AF665}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{130725DF-281C-4A9F-907E-BD55690AF665}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{130725DF-281C-4A9F-907E-BD55690AF665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{130725DF-281C-4A9F-907E-BD55690AF665}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{130725DF-281C-4A9F-907E-BD55690AF665}.Release|iPhone.Build.0 = Release|Any CPU
+		{130725DF-281C-4A9F-907E-BD55690AF665}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{130725DF-281C-4A9F-907E-BD55690AF665}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{130725DF-281C-4A9F-907E-BD55690AF665} = {C3A7B292-3095-4040-A209-364923803378}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {02411775-E406-4A65-B5F6-3FCE3E8A279B}
