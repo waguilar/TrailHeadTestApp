@@ -24,7 +24,7 @@ namespace TrailHeadTestApp.UnitTest
         }
 
         [Test]
-        public async Task LoadEmployeesTestAsync()
+        public async Task LoadEmployeesReturnsDataTestAsync()
         {
             //Arrange
             var employeeList = GetEmployeeList();
@@ -39,7 +39,44 @@ namespace TrailHeadTestApp.UnitTest
             await vm.ExecuteLoadEmployeesCommand();
 
             //Assert
-            Assert.AreEqual(vm.Items.Count, 2);
+            Assert.IsFalse(vm.ItemsIsEmpty);
+        }
+
+        [Test]
+        public async Task LoadEmployeesReturnsEmptyDataTestAsync()
+        {
+            //Arrange
+            var employeeList = new List<IEmployee>();
+            var assignmentsRepositoryMock = new Mock<IEmployeesService>();
+
+            assignmentsRepositoryMock
+                .Setup(x => x.GetEmployeeList(It.IsAny<int>(), It.IsAny<bool>()))
+                .ReturnsAsync(employeeList);
+
+            //Act
+            var vm = new EmployeeListViewModel(assignmentsRepositoryMock.Object);
+            await vm.ExecuteLoadEmployeesCommand();
+
+            //Assert
+            Assert.IsTrue(vm.ItemsIsEmpty);
+        }
+
+        [Test]
+        public async Task LoadEmployeesReturnsNullDataTestAsync()
+        {
+            //Arrange
+            var assignmentsRepositoryMock = new Mock<IEmployeesService>();
+
+            assignmentsRepositoryMock
+                .Setup(x => x.GetEmployeeList(It.IsAny<int>(), It.IsAny<bool>()))
+                .ReturnsAsync((List<IEmployee>)null);
+
+            //Act
+            var vm = new EmployeeListViewModel(assignmentsRepositoryMock.Object);
+            await vm.ExecuteLoadEmployeesCommand();
+
+            //Assert
+            Assert.IsTrue(vm.ItemsIsEmpty);
         }
 
     }
