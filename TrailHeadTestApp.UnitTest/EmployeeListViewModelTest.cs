@@ -2,7 +2,7 @@ using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TrailHeadTestApp.Infrastructure.ApiModel;
+using TrailHeadTestApp.Domain;
 using TrailHeadTestApp.Interfaces.Infrastructure.Repositories;
 using TrailHeadTestApp.Interfaces.Models;
 using TrailHeadTestApp.ViewModels;
@@ -28,7 +28,7 @@ namespace TrailHeadTestApp.UnitTest
         {
             //Arrange
             var employeeList = GetEmployeeList();
-            var assignmentsRepositoryMock = new Mock<IEmployeesRepository>();
+            var assignmentsRepositoryMock = new Mock<IEmployeesService>();
 
             assignmentsRepositoryMock
                 .Setup(x => x.GetEmployeeList(It.IsAny<int>(), It.IsAny<bool>()))

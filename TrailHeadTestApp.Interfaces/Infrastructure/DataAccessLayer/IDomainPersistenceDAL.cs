@@ -2,9 +2,10 @@
 
 namespace TrailHeadTestApp.Interfaces.Infrastructure.DataAccessLayer
 {
-    public interface IEntityPersistence
+    public interface IDomainPersistenceDAL
     {
         Task<T> GetAsync<T>(string id);
-        Task<bool> SaveAsync<T>(object entity, string id);
+
+        Task<bool> SaveAsync<T>(object entity, string id, bool setLastUpdateValue = true);
     }
 }

@@ -2,7 +2,7 @@
 using FFImageLoading.Forms;
 using FFImageLoading.Transformations;
 using System;
-using TrailHeadTestApp.Infrastructure.ApiModel;
+using TrailHeadTestApp.Domain;
 using TrailHeadTestApp.Interfaces.Infrastructure.Repositories;
 using TrailHeadTestApp.ViewModels;
 using Xamarin.Forms;
@@ -16,12 +16,12 @@ namespace TrailHeadTestApp.Views
         private EmployeeListViewModel viewModel;
         private ListView ItemsListView;
 
-        private readonly IEmployeesRepository _employeesRepository;
-        public EmployeeListPage(IEmployeesRepository employeesRepository)
+        private readonly IEmployeesService _employeesRepository;
+        public EmployeeListPage(IEmployeesService employeesRepository)
         {
             _employeesRepository = employeesRepository;
         }
-        public EmployeeListPage() : this(DIService.Container.Resolve<IEmployeesRepository>())
+        public EmployeeListPage() : this(DIService.Container.Resolve<IEmployeesService>())
         {
             //InitializeComponent();
 
@@ -88,7 +88,7 @@ namespace TrailHeadTestApp.Views
             base.OnAppearing();
             try
             {
-                var list = _employeesRepository.GetEmployeeList(0);
+                //var list = _employeesRepository.GetEmployeeList(0);
             }
             catch (Exception e)
             {
@@ -101,9 +101,6 @@ namespace TrailHeadTestApp.Views
             var item = args.SelectedItem as Employee;
             if (item == null)
                 return;
-
-
-            //await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;

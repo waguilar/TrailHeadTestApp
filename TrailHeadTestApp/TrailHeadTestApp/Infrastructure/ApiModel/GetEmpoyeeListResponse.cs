@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using TrailHeadTestApp.Domain;
 using TrailHeadTestApp.Interfaces.Models;
 
 namespace TrailHeadTestApp.Infrastructure.ApiModel
@@ -18,15 +19,5 @@ namespace TrailHeadTestApp.Infrastructure.ApiModel
         public List<IEmployee> data { get; set; }
     }
 
-    public class Employee : IEmployee
-    {
-        [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
-        [JsonProperty(PropertyName = "first_name")]
-        public string FirstName { get; set; }
-        [JsonProperty(PropertyName = "last_name")]
-        public string LastName { get; set; }
-        [JsonProperty(PropertyName = "avatar")]
-        public string Avatar { get; set; }
-    }
+    
 }

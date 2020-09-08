@@ -14,15 +14,15 @@ namespace TrailHeadTestApp.ViewModels
 {
     public class EmployeeListViewModel : BaseViewModel
     {
-        private readonly IEmployeesRepository _employeesRepository;
+        private readonly IEmployeesService _employeeService;
 
-        public EmployeeListViewModel() : this(DIService.Container.Resolve<IEmployeesRepository>())
+        public EmployeeListViewModel() : this(DIService.Container.Resolve<IEmployeesService>())
         {
         }
 
-        public EmployeeListViewModel(IEmployeesRepository employeesRepository)
+        public EmployeeListViewModel(IEmployeesService employeeService)
         {
-            _employeesRepository = employeesRepository;
+            _employeeService = employeeService;
             Title = "Employee List - XAML";
             Items = new ObservableRangeCollection<IEmployee>();
             LoadEmployeesFromWebServiceCommand = new Command(async () => await ExecuteLoadEmployeesCommand());
@@ -44,7 +44,7 @@ namespace TrailHeadTestApp.ViewModels
             try
             {
                 IsBusy = true;
-                var result = await _employeesRepository.GetEmployeeList(0);
+                var result = await _employeeService.GetEmployeeList(0);
                 Items.Clear();
                 Items.AddRange(new ObservableCollection<IEmployee>(result));
                 ItemsIsEmpty = !Items.Any();

@@ -11,20 +11,20 @@ using TrailHeadTestApp.Interfaces.Infrastructure.Repositories;
 using TrailHeadTestApp.Interfaces.Models;
 using TrailHeadTestApp.Interfaces.Services;
 
-namespace TrailHeadTestApp.Infrastructure.Repositories
+namespace TrailHeadTestApp.Infrastructure.Services
 {
-    public class EmployeesRepository : IEmployeesRepository
+    public class EmployeesService : IEmployeesService
     {
         private readonly IRestAPI _restAPI;
         private readonly IConnection _connection;
-        private readonly IEntityPersistence _entityPersistence;
+        private readonly IDomainPersistenceDAL _domainPersistenceDAL;
         private readonly ILogService _logService;
 
-        public EmployeesRepository() : base()
+        public EmployeesService() : base()
         {
             _restAPI = DIService.Container.Resolve<IRestAPI>();
             _connection = DIService.Container.Resolve<IConnection>();
-            _entityPersistence = DIService.Container.Resolve<IEntityPersistence>();
+            _domainPersistenceDAL = DIService.Container.Resolve<IDomainPersistenceDAL>();
             _logService = DIService.Container.Resolve<ILogService>();
         }
 
@@ -39,11 +39,11 @@ namespace TrailHeadTestApp.Infrastructure.Repositories
             {
                 if (_connection.IsConnected)
                 {
-                    var result = await _restAPI.RestServiceGetCallAsync(string.Format( Constants.GET_USER_LIST + $"?page={page}"));
+                    var result = await _restAPI.RestServiceGetCallAsync(string.Format(Constants.GET_USER_LIST + $"?page={page}"));
                     if (!string.IsNullOrEmpty(result))
                     {
                         var response = JsonConvert.DeserializeObject<GetEmpoyeeListResponse>(result);
-                        await _entityPersistence.SaveAsync<GetEmpoyeeListResponse>(response, "GetEmpoyeeListResponse");
+                        await _domainPersistenceDAL.SaveAsync<GetEmpoyeeListResponse>(response, "GetEmpoyeeListResponse");
                         return response.data;
 
                     }
@@ -51,7 +51,8 @@ namespace TrailHeadTestApp.Infrastructure.Repositories
                 }
                 else
                 {
-                    var cache = await _entityPersistence.GetAsync<GetEmpoyeeListResponse>("GetEmpoyeeListResponse");
+                    //var cache = await _entityPersistence.GetAsync<GetEmpoyeeListResponse>("GetEmpoyeeListResponse");
+                    var cache = await _domainPersistenceDAL.GetAsync<GetEmpoyeeListResponse>("GetEmpoyeeListResponse");
                     return cache.data;
                 }
             }

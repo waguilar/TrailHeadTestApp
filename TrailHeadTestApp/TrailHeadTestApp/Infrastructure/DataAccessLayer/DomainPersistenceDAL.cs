@@ -1,30 +1,38 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Threading.Tasks;
+using TrailHeadTestApp.Interfaces.Infrastructure.DataAccessLayer;
 using TrailHeadTestApp.Interfaces.Infrastructure.Helpers;
 
 namespace TrailHeadTestApp.Infrastructure.DataAccessLayer
 {
-    public class DomainPersistenceDAL : BaseDAL<DomainPersistence>
+    public class DomainPersistenceDAL : BaseDAL<DomainPersistence>, IDomainPersistenceDAL
     {
         public DomainPersistenceDAL(IDbHelper sqlite) : base(sqlite)
         { }
 
-        public async Task SaveAsync(string entityId,
-                                     string entityType,
-                                     string entityData,
-                                     bool setLastUpdateValue = true)
+        public async Task<bool> SaveAsync<T>(object entity, string id, bool setLastUpdateValue = true)
         {
-            var domainPersistence = new DomainPersistence
+            try
             {
-                Data = entityData,
-                EntityId = entityId,
-                EntityType = entityType
-            };
-            if (setLastUpdateValue)
-            {
-                domainPersistence.LastUpdate = DateTime.Now;
+                var serializedEntity = JsonConvert.SerializeObject(entity);
+                var domainPersistence = new DomainPersistence
+                {
+                    Data = serializedEntity,
+                    EntityId = id,
+                    EntityType = typeof(T).ToString()
+                };
+                if (setLastUpdateValue)
+                {
+                    domainPersistence.LastUpdate = DateTime.Now;
+                }
+                await SaveAsync(domainPersistence);
+                return true;
             }
-            await SaveAsync(domainPersistence);
+            catch
+            {
+                return false;
+            }
         }
 
         private async Task SaveAsync(DomainPersistence domainPersistence)
@@ -56,7 +64,14 @@ namespace TrailHeadTestApp.Infrastructure.DataAccessLayer
         public async Task<string> GetAsync(string entityId,
                                             string entityType)
         {
+
             return (await GetEntityAsync(entityId, entityType))?.Data;
+        }
+
+        public async Task<T> GetAsync<T>(string id)
+        {
+            var data = (await GetEntityAsync(id, typeof(T).ToString()))?.Data;
+            return JsonConvert.DeserializeObject<T>(data);
         }
     }
 }
